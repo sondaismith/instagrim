@@ -53,6 +53,7 @@
                             <br/>
                             <input type="submit" value="Press"> to upload the file!
                         </form>
+                        <p style="color:red">${successmessage}</p>
                     </article>
                 </div>
             </div>
