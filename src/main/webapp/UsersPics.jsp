@@ -12,47 +12,66 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="../css/styles.css" />
     </head>
     <body>
-        <header>
-        
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <header class="header">
+            <div class="centered-block centered-text">
+                <div class="top-bar-left"><a class="bar-button" href="../../Instagrim">Home</a></div>
+                <div class="top-bar-right"><a class="bar-button" href="../Logout">Logout</a></div>
+                <div class="top-bar-right"><a class="bar-button" href="../Upload">Upload</a></div>
+                <div class="top-bar-center">Instafilter</div>
+            </div>
         </header>
-        
-        <nav>
-            <ul>
-                <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
- 
-        <article>
-            <h1>Your Pics</h1>
-        <%
-            java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
-            if (lsPics == null) {
-        %>
-        <p>No Pictures found</p>
-        <%
-        } else {
-            Iterator<Pic> iterator;
-            iterator = lsPics.iterator();
-            while (iterator.hasNext()) {
-                Pic p = (Pic) iterator.next();
+        <div class="centered-block">
+            <div class="main-pad">
+                <div class="welcome-box">
+                <%
+                    LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                            if (lg != null) 
+                            {
+                                String UserName = lg.getUsername();
+                            }
+                    %>
+                    <p class="intro-text"><%=lg.getUsername()%>'s Pics</p>
+                </div>
+                <article>
+                <%
+                    java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
+                    if (lsPics == null) 
+                    {
+                %>
+                <p class="no-pics-text">No Pictures Found</p>
+                <%
+                    }
+                    else 
+                    {
+                        Iterator<Pic> iterator;
+                        iterator = lsPics.iterator();
 
-        %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
-
-            }
-            }
-        %>
-        </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
+                        while (iterator.hasNext()) 
+                        {
+                            Pic p = (Pic) iterator.next();
+                %>
+                <div class="image-box">
+                    <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+                    <div class="image-box-descriptor">
+                        <p>Uploaded: <%=p.getDateUploaded()%></p>
+                        <p>User: <%=p.getUser()%></p>
+                    </div>
+                </div>
+                <%
+                        }
+                    }
+                %>
+                </article>
+                </div>
+                <footer>
+                    <ul>
+                        <li>&COPY; Sondai Smith</li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
     </body>
 </html>

@@ -26,8 +26,8 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
  * @author Administrator
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-
+public class Login extends HttpServlet 
+{
     Cluster cluster=null;
 
 
@@ -35,7 +35,9 @@ public class Login extends HttpServlet {
         // TODO Auto-generated method stub
         cluster = CassandraHosts.getCluster();
     }
-
+    
+    
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -63,14 +65,24 @@ public class Login extends HttpServlet {
             //request.setAttribute("LoggedIn", lg);
             
             session.setAttribute("LoggedIn", lg);
-            System.out.println("Session in servlet "+session);
+            session.setAttribute("username", username);
+            System.out.println("Session in servlet "+session+". Username= "+session.getAttribute("username"));
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	    rd.forward(request,response);
-            
         }else{
-            response.sendRedirect("/Instagrim/login.jsp");
+            request.setAttribute("errormessage", "Please re-enter details.");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            //response.sendRedirect("/Instagrim/login.jsp");
         }
-        
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+        rd.forward(request,response);
+        //response.getWriter().write("<html><body><h1>Login</h1></body></html>");
     }
 
     /**

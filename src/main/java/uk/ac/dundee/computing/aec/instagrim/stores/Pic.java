@@ -7,6 +7,7 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
 
 import com.datastax.driver.core.utils.Bytes;
 import java.nio.ByteBuffer;
+import java.sql.Timestamp;
 
 /**
  *
@@ -18,6 +19,8 @@ public class Pic {
     private int length;
     private String type;
     private java.util.UUID UUID=null;
+    private String user = null;
+    private java.util.Date date_uploaded = null;
     
     public void Pic() {
 
@@ -28,6 +31,24 @@ public class Pic {
     public String getSUUID(){
         return UUID.toString();
     }
+    
+    public void setUser(String user){
+        this.user =user;
+    }
+    public String getUser(){
+        return user;
+    }
+    
+    public void setDateUploaded(java.util.Date du)
+    {
+        this.date_uploaded = du;
+    }
+    
+    public java.util.Date getDateUploaded()
+    {
+        return date_uploaded;
+    }
+    
     public void setPic(ByteBuffer bImage, int length,String type) {
         this.bImage = bImage;
         this.length = length;

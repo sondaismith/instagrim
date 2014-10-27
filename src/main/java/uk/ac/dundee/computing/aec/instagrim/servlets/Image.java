@@ -71,10 +71,17 @@ public class Image extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        System.out.println("Image.java Servlet doGet method.");
+        System.out.println("________________________________");
         String args[] = Convertors.SplitRequestPath(request);
+        for(String s : args)
+                {
+                    System.out.println(s);
+                }
         int command;
         try {
             command = (Integer) CommandsMap.get(args[1]);
+            System.out.println("Command Number: "+command);
         } catch (Exception et) {
             error("Bad Operator", response);
             return;

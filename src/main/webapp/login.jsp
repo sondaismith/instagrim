@@ -9,38 +9,44 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <title>Log in to Instafilter</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
     </head>
     <body>
-        <header>
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <header class="header">
+            <div class="centered-block centered-text">
+                <div class="top-bar-left"><a class="bar-button" href="../Instagrim">Home</a></div>
+                <div class="top-bar-right"><a class="bar-button" href="Login">Login</a></div>
+                <div class="top-bar-center">Instafilter</div>
+            </div>
         </header>
-        <nav>
-            <ul>
-                
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
-       
-        <article>
-            <h3>Login</h3>
-            <form method="POST"  action="Login">
+        <div class="centered-block">
+            <div class="main-pad">
+                <div class="welcome-box">
+                    <p class="intro-text">Login</p>
+                </div>
+                <div class="form-box">
+                    <article>
+                        <form method="POST"  action="Login">
+                            <ul>
+                                <li>User Name:<input type="text" name="username"></li>
+                                <li>Password:<input type="password" name="password"></li>
+                            </ul>
+                            <input type="submit" value="Login"> 
+                        </form>
+                    </article>
+                    <p style="color:red">${errormessage}</p>
+                    <div class="main-pad">
+                        <p>Don't have an account? <a href="Register" class="highlighted-anchor">Register</a> for one here!</p>
+                    </div>
+                </div>
+            </div>
+            <footer>
                 <ul>
-                    <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
+                    <li>&COPY; Sondai Smith</li>
                 </ul>
-                <br/>
-                <input type="submit" value="Login"> 
-            </form>
-
-        </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
+            </footer>
+        </div>
     </body>
 </html>

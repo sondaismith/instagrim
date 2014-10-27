@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
@@ -135,7 +136,7 @@ public class PicModel {
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
+        PreparedStatement ps = session.prepare("select * from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -148,12 +149,57 @@ public class PicModel {
             for (Row row : rs) {
                 Pic pic = new Pic();
                 java.util.UUID UUID = row.getUUID("picid");
+                String username = row.getString("user");
+                java.util.Date du = row.getDate("pic_added");
                 System.out.println("UUID" + UUID.toString());
                 pic.setUUID(UUID);
+                pic.setUser(username);
+                pic.setDateUploaded(du);
                 Pics.add(pic);
 
             }
         }
+        return Pics;
+    }
+    
+    public java.util.LinkedList<Pic> getPicShowcase()
+    {
+        System.out.println("Get Showcase Started.");
+        java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
+        
+        System.out.println("Connecting to database.");
+        Session session = cluster.connect("instagrim");
+        System.out.println("Connected.");
+        System.out.println("Prepared statement about to be created.");
+        PreparedStatement ps = session.prepare("select * from userpiclist limit ?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        5));
+        if (rs.isExhausted()) 
+        {
+            System.out.println("No Images returned pleb");
+            return null;
+        } 
+        else 
+        {
+            
+            for (Row row : rs) 
+            {
+                Pic pic = new Pic();
+                java.util.UUID UUID = row.getUUID("picid");
+                String username = row.getString("user");
+                java.util.Date du = row.getDate("pic_added");
+                System.out.println("UUID" + UUID.toString());
+                System.out.println(username.toString());
+                pic.setUUID(UUID);
+                pic.setUser(username);
+                pic.setDateUploaded(du);
+                Pics.add(pic);
+            }
+        }
+        //Collections.sort(Pics, new PicComparator().reversed());
         return Pics;
     }
 

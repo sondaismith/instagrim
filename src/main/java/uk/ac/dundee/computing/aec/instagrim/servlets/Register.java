@@ -24,15 +24,22 @@ import uk.ac.dundee.computing.aec.instagrim.models.User;
  * @author Administrator
  */
 @WebServlet(name = "Register", urlPatterns = {"/Register"})
-public class Register extends HttpServlet {
-    Cluster cluster=null;
-    public void init(ServletConfig config) throws ServletException {
-        // TODO Auto-generated method stub
-        cluster = CassandraHosts.getCluster();
+    public class Register extends HttpServlet 
+    {
+        Cluster cluster=null;
+        public void init(ServletConfig config) throws ServletException {
+            // TODO Auto-generated method stub
+            cluster = CassandraHosts.getCluster();
     }
 
 
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+        rd.forward(request,response);
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -44,7 +51,8 @@ public class Register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         
@@ -53,7 +61,6 @@ public class Register extends HttpServlet {
         us.RegisterUser(username, password);
         
 	response.sendRedirect("/Instagrim");
-        
     }
 
     /**
