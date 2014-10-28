@@ -12,5 +12,6 @@ uk\ac\dundee\computing\aec\instagrim\lib\CassandraHosts.class
 uk\ac\dundee\computing\aec\instagrim\stores\LoggedIn.class
 uk\ac\dundee\computing\aec\instagrim\lib\AeSimpleSHA1.class
 uk\ac\dundee\computing\aec\instagrim\models\User.class
+uk\ac\dundee\computing\aec\instagrim\servlets\Delete.class
 uk\ac\dundee\computing\aec\instagrim\lib\Keyspaces.class
 uk\ac\dundee\computing\aec\instagrim\servlets\MainPage.class

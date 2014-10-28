@@ -115,9 +115,9 @@ public class Image extends HttpServlet {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
   
-        
+        System.out.println("Trying to getpic: "+Image);
         Pic p = tm.getPic(type,java.util.UUID.fromString(Image));
-        
+        System.out.println("Got pic: "+Image);
         OutputStream out = response.getOutputStream();
 
         response.setContentType(p.getType());

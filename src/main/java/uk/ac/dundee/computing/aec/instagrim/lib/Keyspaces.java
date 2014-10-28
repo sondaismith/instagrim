@@ -30,12 +30,18 @@ public final class Keyspaces {
                     + " name  varchar,"
                     + " PRIMARY KEY (picid)"
                     + ")";
+//            String Createuserpiclist = "CREATE TABLE if not exists instagrim.userpiclist (\n"
+//                    + "picid uuid,\n"
+//                    + "user varchar,\n"
+//                    + "pic_added timestamp,\n"
+//                    + "PRIMARY KEY (user,pic_added)\n"
+//                    + ") WITH CLUSTERING ORDER BY (pic_added desc);";
             String Createuserpiclist = "CREATE TABLE if not exists instagrim.userpiclist (\n"
                     + "picid uuid,\n"
                     + "user varchar,\n"
                     + "pic_added timestamp,\n"
-                    + "PRIMARY KEY (user,pic_added)\n"
-                    + ") WITH CLUSTERING ORDER BY (pic_added desc);";
+                    + "PRIMARY KEY (picid,user,pic_added)\n"
+                    + ");";
             String CreateAddressType = "CREATE TYPE if not exists instagrim.address (\n"
                     + "      street text,\n"
                     + "      city text,\n"

@@ -41,6 +41,7 @@
                     if (lsPics == null) 
                     {
                 %>
+                <p style="color:red">${deletemessage}</p>
                 <p class="no-pics-text">No Pictures Found</p>
                 <%
                     }
@@ -54,10 +55,20 @@
                             Pic p = (Pic) iterator.next();
                 %>
                 <div class="image-box">
-                    <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
-                    <div class="image-box-descriptor">
-                        <p>Uploaded: <%=p.getDateUploaded()%></p>
-                        <p>User: <%=p.getUser()%></p>
+                    <div>
+                        <a href="/Instagrim/Image/<%=p.getSUUID().toString()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+                        <div class="image-box-descriptor">
+                            <p>Uploaded: <%=p.getDateUploaded()%></p>
+                            <p>User: <%=p.getUser()%></p>
+                        </div>
+                        <form method="POST" action="../Delete">
+                            <input type="text" name="picid" value="<%=p.getSUUID().toString()%>">
+<!--                            <input type="hidden" name="picid" value="<%=p.getSUUID().toString()%>"/>-->
+                            <input type="text" name="username" value="<%=p.getUser()%>">
+<!--                            <input type="hidden" name="username" value="<%=p.getUser()%>"/>-->
+                            <input type="text" name="dateuploaded" value="<%=p.getDateUploaded()%>">
+                            <input type="submit" value="Delete Image">
+                        </form>
                     </div>
                 </div>
                 <%
